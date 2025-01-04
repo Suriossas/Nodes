@@ -14,4 +14,8 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-docker run --platform linux/amd64 -p $NODE_PORT:$NODE_PORT --name $NODE_NAME -e NODE_PORT=$NODE_PORT -d ubuntu /bin/bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo apt install -y docker.io
+
+docker run -it --platform linux/amd64 -p $NODE_PORT:$NODE_PORT --name $NODE_NAME -e NODE_PORT=$NODE_PORT ubuntu /bin/bash
