@@ -21,14 +21,21 @@ download_node() {
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
   source ~/.bashrc
 
-  curl -sSfL 'https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/install.sh' | bash
+  curl -sSfL 'https://raw.githubusercontent.com/GaiaNet-AI/gaianet-node/main/install.sh' | bash
+  ed -i 's|curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v $wasmedge_version --ggmlbn=$ggml_bn --tmpdir=$tmp_dir|curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v 0.13.5 --noavx|' script.sh
+
   source ~/.bashrc
+  source /root/.bashrc
 }
 
 keep_download() {
   source /root/.bashrc
 
   gaianet init --config https://raw.gaianet.ai/qwen2-0.5b-instruct/config.json
+
+  # Установка домена так как в последней версии gaia решила всех перевести на домены
+  gaianet config --domain us.gaianet.network
+  gaianet init
 
   gaianet start
 
