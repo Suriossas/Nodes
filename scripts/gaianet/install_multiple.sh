@@ -14,9 +14,8 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-docker run -it --platform linux/amd64 -p $NODE_PORT:$NODE_PORT  --name $NODE_NAME ubuntu /bin/bash
+docker run -it --platform linux/amd64 -p $NODE_PORT:$NODE_PORT  --name $NODE_NAME ubuntu /bin/bash -d
 
-apt update -y && apt upgrade -y
-apt install -y sudo wget
-
-sudo wget https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/gaia.sh && chmod +x gaia.sh && ./gaia.sh --port $NODE_PORT
+docker exec $NODE_NAME sh -c "apt update -y && apt upgrade -y"
+docker exec $NODE_NAME sh -c "apt install -y sudo wget"
+docker exec $NODE_NAME sh -c "sudo wget https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/gaia.sh && chmod +x gaia.sh && ./gaia.sh --port $NODE_PORT"
