@@ -14,7 +14,7 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-docker run -it --platform linux/amd64 -p $NODE_PORT:$NODE_PORT  --name $NODE_NAME ubuntu /bin/bash -d
+docker run --platform linux/amd64 -p $NODE_PORT:$NODE_PORT  --name $NODE_NAME ubuntu /bin/bash
 
 docker exec $NODE_NAME sh -c "apt update -y && apt upgrade -y"
 docker exec $NODE_NAME sh -c "apt install -y sudo wget"
