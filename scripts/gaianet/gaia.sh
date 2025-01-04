@@ -28,7 +28,6 @@ download_node() {
   rm install_temp_gaia.sh
 
   source ~/.bashrc
-  cd "/root"
   source /root/.bashrc
 
   echo "Порт ноды: $NODE_PORT";
@@ -58,7 +57,7 @@ keep_download() {
   gaianet info
 
   read -p "Введите ваш Node ID (но перед этим зайдите по ссылке из гайда на сервере): " NEW_ID
-  sed -i "s/0x0aa110d2e3a2f14fc122c849cea06d1bc9ed1c62/$NEW_ID/g" config.json
+  sed -i "s/0x0aa110d2e3a2f14fc122c849cea06d1bc9ed1c62.us.gaianet.network/$NEW_ID.gaia.domains/g" config.json
 
   sleep 15
 
