@@ -54,10 +54,14 @@ keep_download() {
   cd gaianet
   npm i
 
+  sudo wget https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.sh
+
   gaianet info
 
+  cd $HOME/bot/gaianet
+
   read -p "Введите ваш Node ID (но перед этим зайдите по ссылке из гайда на сервере): " NEW_ID
-  sed -i "s/0x0aa110d2e3a2f14fc122c849cea06d1bc9ed1c62.us.gaianet.network/$NEW_ID.gaia.domains/g" config.json
+  sed -i "s#0x0aa110d2e3a2f14fc122c849cea06d1bc9ed1c62.us.gaianet.network#$NEW_ID.gaia.domains#" config.json
 
   sleep 15
 
