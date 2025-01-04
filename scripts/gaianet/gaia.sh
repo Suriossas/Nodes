@@ -21,11 +21,16 @@ download_node() {
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
   source ~/.bashrc
 
-  curl -sSfL 'https://raw.githubusercontent.com/GaiaNet-AI/gaianet-node/main/install.sh' | bash
-  sed -i 's|curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v $wasmedge_version --ggmlbn=$ggml_bn --tmpdir=$tmp_dir|curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v 0.13.5 --noavx|' install.sh
+  curl -o install_temp_gaia.sh https://raw.githubusercontent.com/GaiaNet-AI/gaianet-node/main/install.sh
+  sed -i 's#curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v $wasmedge_version --ggmlbn=$ggml_bn --tmpdir=$tmp_dir#curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v 0.13.5 --noavx#' install_temp_gaia.sh
+  sed -i 's#wasmedge_version="[^"]*"#wasmedge_version="0.13.5"#' install_temp_gaia.sh
+  bash install_temp_gaia.sh
+  rm install_temp_gaia.sh
 
   source ~/.bashrc
   source /root/.bashrc
+
+  echo "Порт ноды: $NODE_PORT";
 }
 
 keep_download() {
@@ -34,8 +39,12 @@ keep_download() {
   gaianet init --config https://raw.gaianet.ai/qwen2-0.5b-instruct/config.json
 
   # Установка домена так как в последней версии gaia решила всех перевести на домены
-  gaianet config --domain us.gaianet.network
-  gaianet init
+  # gaianet config --domain us.gaianet.network
+  # gaianet init
+
+  # Установка порта
+  gaianet config --port $NODE_PORT
+  gaianet init  
 
   gaianet start
 
@@ -111,6 +120,14 @@ delete_node() {
 exit_from_script() {
   exit 0
 }
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --port) NODE_PORT=$2; shift ;;        
+        *) echo "Неизвестный параметр: $1"; exit 1 ;;
+    esac
+    shift
+done
 
 while true; do
     channel_logo
