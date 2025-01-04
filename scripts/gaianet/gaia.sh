@@ -48,6 +48,7 @@ keep_download() {
 
   gaianet start
 
+  cd root
   mkdir bot
   cd bot
   git clone https://github.com/0xdmimaz/gaianet/
