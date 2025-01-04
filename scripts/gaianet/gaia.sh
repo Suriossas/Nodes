@@ -28,6 +28,7 @@ download_node() {
   rm install_temp_gaia.sh
 
   source ~/.bashrc
+  cd "/root"
   source /root/.bashrc
 
   echo "Порт ноды: $NODE_PORT";
