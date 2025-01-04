@@ -18,4 +18,5 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo apt install -y docker.io
 
-docker run -it --platform linux/amd64 -p $NODE_PORT:$NODE_PORT --name $NODE_NAME -e NODE_PORT=$NODE_PORT ubuntu /bin/bash
+docker run -dit --platform linux/amd64 -p $NODE_PORT:$NODE_PORT --name $NODE_NAME -e NODE_PORT=$NODE_PORT ubuntu tail -f /dev/null
+docker exec -it $NODE_NAME /bin/bash
