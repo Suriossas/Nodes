@@ -54,7 +54,7 @@ keep_download() {
   cd gaianet
   npm i
 
-  sudo wget https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.sh
+  sudo wget https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.js
 
   gaianet info
 
