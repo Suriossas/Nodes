@@ -89,13 +89,7 @@ start_node() {
   gaianet start  
   
   # Удаление ранее созданных screen-сессий gaianet_checker и gaianetnode
-  screen -ls | grep -E 'gaianet_checker|gaianetnode' | awk '{print $1}' | xargs -r -I{} screen -S {} -X quit
-
-  screen -dmS gaianet_checker bash -c '
-    cd /root/bot/gaianet/
-    bash gaia_check.sh
-    exec bash
-  '
+  screen -ls | grep -E 'gaianetnode' | awk '{print $1}' | xargs -r -I{} screen -S {} -X quit
 
   screen -dmS gaianetnode bash -c '
     echo "Начало выполнения скрипта в screen-сессии"
