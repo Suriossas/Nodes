@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PID_FILE="/gaianet/llamaedge.pid"
+PID_FILE="$HOME/gaianet/llamaedge.pid"
 PROCESS_CMD="gaianet start"
 
 while true; do
