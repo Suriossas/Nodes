@@ -55,6 +55,8 @@ keep_download() {
   cd gaianet
   npm i
 
+  sudo wget --no-cache -O bot_gaia.js https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.js
+
   cd $HOME/bot/gaianet
 
   gaianet info
@@ -82,10 +84,7 @@ update_node() {
 }
 
 start_node() {
-  cd $HOME/bot/gaianet
-
-  sudo wget --no-cache -O bot_gaia.js https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.js
-  sudo wget --no-cache -O gaia_check.sh https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/gaia_check.sh && chmod +x gaia_check.sh
+  cd $HOME/bot/gaianet   
 
   gaianet start  
   
