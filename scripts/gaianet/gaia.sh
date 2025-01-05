@@ -83,7 +83,7 @@ keep_download() {
 
     exec bash
   '
-  
+
   echo "Screen сессии 'gaianet_checker' и 'gaianetnode' созданы..." 
 }
 
@@ -104,20 +104,32 @@ update_node() {
 }
 
 start_node() {
+
+  sudo wget -O bot_gaia.js https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.js
+  sudo wget -O gaia_check.sh https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/gaia_check.sh && chmod +x gaia_check.sh
+
   gaianet start
   
   sleep 10
   
+  # Удаление ранее созданных screen-сессий gaianet_checker и gaianetnode
+  screen -ls | grep -E 'gaianet_checker|gaianetnode' | awk '{print $1}' | xargs -r screen -S {} -X quit
+
+  screen -dmS gaianet_checker bash -c '
+    cd /root/bot/gaianet/
+    bash gaia_check.sh
+  '
+
   screen -dmS gaianetnode bash -c '
     echo "Начало выполнения скрипта в screen-сессии"
-    
+
     cd /root/bot/gaianet/
     node bot_gaia.js
 
     exec bash
   '
 
-  echo "Screen сессия 'gaianetnode' создана..."
+  echo "Screen сессии 'gaianet_checker' и 'gaianetnode' созданы..." 
 }
 
 stop_node() {
