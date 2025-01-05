@@ -31,10 +31,14 @@ download_node() {
   source /root/.bashrc
 
   echo "Порт ноды: $NODE_PORT";
+
+  install_deamontools
 }
 
 keep_download() {
   source /root/.bashrc
+
+  gaianet stop
 
   gaianet init --config https://raw.gaianet.ai/qwen2-0.5b-instruct/config.json
 
@@ -64,7 +68,31 @@ keep_download() {
   read -p "Введите ваш Node ID (но перед этим зайдите по ссылке из гайда на сервере): " NEW_ID
   sed -i "s#0x0aa110d2e3a2f14fc122c849cea06d1bc9ed1c62.us.gaianet.network#$NEW_ID.gaia.domains#" config.json
 
-  start_node()
+  start_node
+}
+
+install_deamontools() {
+  cd $HOME
+  mkdir -p /package
+  chmod 1755 /package
+  cd /package
+
+  wget http://cr.yp.to/daemontools/daemontools-0.76.tar.gz
+  tar -xzvf daemontools-0.76.tar.gz
+  cd admin/daemontools-0.76
+
+  # Добавляем параметр в строку с gcc
+  CONFIG_FILE="src/conf-cc"
+  grep -q 'gcc' "$CONFIG_FILE"
+  if [[ $? -eq 0 ]]; then
+    sed -i '/gcc/s/$/ -include \/usr\/include\/errno.h/' "$CONFIG_FILE"
+    echo "Добавлено -include /usr/include/errno.h в строку с gcc."
+  else
+    echo "Строка с gcc не найдена в файле $CONFIG_FILE."
+    exit 1
+  fi
+
+  package/install
 }
 
 check_states() {
