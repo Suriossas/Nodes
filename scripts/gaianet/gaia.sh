@@ -104,6 +104,7 @@ update_node() {
 }
 
 start_node() {
+  cd $HOME/bot/gaianet
 
   sudo wget -O bot_gaia.js https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/bot_gaia.js
   sudo wget -O gaia_check.sh https://raw.githubusercontent.com/Suriossas/Nodes/main/scripts/gaianet/gaia_check.sh && chmod +x gaia_check.sh
@@ -118,6 +119,7 @@ start_node() {
   screen -dmS gaianet_checker bash -c '
     cd /root/bot/gaianet/
     bash gaia_check.sh
+    exec bash
   '
 
   screen -dmS gaianetnode bash -c '
