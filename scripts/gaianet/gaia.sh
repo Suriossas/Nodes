@@ -128,7 +128,7 @@ start_node() {
     exec bash
   '
 
-  echo "Screen сессии 'gaianet_checker' и 'gaianetnode' созданы..." 
+  echo "Screen сессия 'gaianetnode' созданы..." 
 }
 
 stop_node() {
