@@ -60,9 +60,9 @@ sed -i \
 
 # Замена портов в файле docker-compose.yaml
 sed -i \
-  -e "s/8080/${WORKER_PORT_1}:${WORKER_PORT_1}/g" \
-  -e "s/5555/${WORKER_PORT_2}:${WORKER_PORT_2}/g" \
-  -e "s/8000/${SCRAPER_PORT}:${SCRAPER_PORT}/g" \
+  -e "s/8080/${WORKER_PORT_1}/g" \
+  -e "s/5555/${WORKER_PORT_2}/g" \
+  -e "s/8000/${SCRAPER_PORT}/g" \
   "$CONGIG_FILE_PATH"
 
 # Удаление контейнера
