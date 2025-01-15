@@ -1,7 +1,14 @@
 read -p "Ваш домен: " NODE_DOMAIN
 
 cd $HOME/bot/gaianet
-sed -i "s#\"url\":\"[^\"]*\"#\"url\": \"https://$NODE_DOMAIN/v1/chat/completions\"#" config.json
+
+echo "
+{
+    "pathToFile": "phrases.txt",
+    "pathToFile_debug": "debug_phrases.txt",
+    "url": "https://$NODE_DOMAIN/v1/chat/completions"
+}
+" > config.json
 
 gaianet stop
 gaianet config --domain gaia.domains
