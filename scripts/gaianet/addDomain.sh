@@ -1,4 +1,4 @@
-echo $"Ваш домен: " NODE_DOMAIN
+read -p $"Ваш домен: " NODE_DOMAIN
 
 cd $HOME/bot/gaianet
 sed -i 's#"url":"[^"]*"#"url":"https://$NODE_DOMAIN/v1/chat/completions"#' config.json
