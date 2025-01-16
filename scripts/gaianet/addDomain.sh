@@ -3,7 +3,7 @@ read -p "Ваш домен: " NODE_DOMAIN
 cd $HOME/bot/gaianet
 
 echo "{
-    \"pathToFile\": "\phrases.txt\",
+    \"pathToFile\": \"phrases.txt\",
     \"pathToFile_debug\": \"debug_phrases.txt\",
     \"url\": \"https://$NODE_DOMAIN/v1/chat/completions\"
 }" > config.json
