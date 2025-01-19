@@ -109,9 +109,9 @@ update_node() {
   curl -o install_temp_gaia.sh https://raw.githubusercontent.com/GaiaNet-AI/gaianet-node/main/install.sh
   sed -i 's#curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v $wasmedge_version --ggmlbn=$ggml_bn --tmpdir=$tmp_dir#curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install_v2.sh | bash -s -- -v 0.14.1 --noavx#' install_temp_gaia.sh
   sed -i 's#wasmedge_version="[^"]*"#wasmedge_version="0.14.1"#' install_temp_gaia.sh
-  bash install_temp_gaia.sh -s -- --upgrade
+  bash install_temp_gaia.sh --upgrade
   rm install_temp_gaia.sh
-  
+
   echo 'Нода обновилась...'
 }
 
